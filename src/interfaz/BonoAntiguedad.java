@@ -5,6 +5,9 @@
  */
 package interfaz;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LUCYLEONOR
@@ -32,7 +35,7 @@ public class BonoAntiguedad extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtA = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblB = new javax.swing.JLabel();
         cmdCalcular = new javax.swing.JButton();
         cmdRestaurar = new javax.swing.JButton();
 
@@ -49,27 +52,97 @@ public class BonoAntiguedad extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Años laborales");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        txtA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtA, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 90, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Bono Por Antigüedad");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, 40));
+        lblB.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        lblB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblB, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 170, 40));
 
         cmdCalcular.setText("Calcular");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
 
         cmdRestaurar.setText("Restaurar");
+        cmdRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRestaurarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdRestaurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+
+        if (txtA.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "El bono se otorga solo si lleva un año laborando");
+        }
+        else{ 
+       
+        String r;
+        double b, t;
+        
+        b = Double.parseDouble(txtA.getText());
+        
+        t = 100000 + 120000 * (b - 1);
+        
+        r = String.valueOf(t);
+        
+        lblB.setText(r);
+        
+        }
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRestaurarActionPerformed
+
+        txtA.setText("");
+        lblB.setText("");
+        txtA.requestFocusInWindow();
+    }//GEN-LAST:event_cmdRestaurarActionPerformed
+
+    private void txtAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+ 
+        if (txtA.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "El bono se otorga solo si lleva un año laborando");
+        }
+ 
+        else{
+            
+        
+        String r;
+        double b, t;
+        
+        b = Double.parseDouble(txtA.getText());
+        
+        t = 100000 + 120000 * (b - 1);
+        
+        r = String.valueOf(t);
+        
+        lblB.setText(r);
+        
+        }
+        }
+    }//GEN-LAST:event_txtAKeyPressed
 
     /**
      * @param args the command line arguments
@@ -112,8 +185,8 @@ public class BonoAntiguedad extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblB;
     private javax.swing.JTextField txtA;
     // End of variables declaration//GEN-END:variables
 }

@@ -57,6 +57,9 @@ public class BonoAntiguedad extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtAKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAKeyTyped(evt);
+            }
         });
         jPanel1.add(txtA, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 90, -1));
 
@@ -92,22 +95,27 @@ public class BonoAntiguedad extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
-        if (txtA.getText().equalsIgnoreCase("0")) {
-            JOptionPane.showMessageDialog(this, "El bono se otorga solo si lleva un año laborando");
-        }
-        else{ 
-       
-        String r;
-        double b, t;
-        
-        b = Double.parseDouble(txtA.getText());
-        
-        t = 100000 + 120000 * (b - 1);
-        
-        r = String.valueOf(t);
-        
-        lblB.setText(r);
-        
+        if (txtA.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese Los Años Laborados", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtA.requestFocusInWindow();
+        } else if (txtA.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this,"El bono se otorga solo si lleva un año laborando","ERROR",JOptionPane.ERROR_MESSAGE);
+            txtA.requestFocusInWindow();
+            txtA.selectAll();
+            
+        } else {
+
+            String r;
+            double b, t;
+
+            b = Double.parseDouble(txtA.getText());
+
+            t = 100000 + 120000 * (b - 1);
+
+            r = String.valueOf(t);
+
+            lblB.setText("$ " + r);
+
         }
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -121,28 +129,39 @@ public class BonoAntiguedad extends javax.swing.JFrame {
     private void txtAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAKeyPressed
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
- 
-        if (txtA.getText().equalsIgnoreCase("0")) {
-            JOptionPane.showMessageDialog(this, "El bono se otorga solo si lleva un año laborando");
-        }
- 
-        else{
-            
-        
-        String r;
-        double b, t;
-        
-        b = Double.parseDouble(txtA.getText());
-        
-        t = 100000 + 120000 * (b - 1);
-        
-        r = String.valueOf(t);
-        
-        lblB.setText(r);
-        
-        }
+
+            if (txtA.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese Los Años Laborados", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtA.requestFocusInWindow();
+            } else if (txtA.getText().equalsIgnoreCase("0")) {
+                JOptionPane.showMessageDialog(this,"El bono se otorga solo si lleva un año laborando","ERROR",JOptionPane.ERROR_MESSAGE);
+                txtA.requestFocusInWindow();
+                txtA.selectAll();
+            } else {
+
+                String r;
+                double b, t;
+
+                b = Double.parseDouble(txtA.getText());
+
+                t = 100000 + 120000 * (b - 1);
+
+                r = String.valueOf(t);
+
+                lblB.setText("$ " + r);
+
+            }
         }
     }//GEN-LAST:event_txtAKeyPressed
+
+    private void txtAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAKeyTyped
 
     /**
      * @param args the command line arguments
